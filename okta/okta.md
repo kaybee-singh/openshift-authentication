@@ -1,31 +1,67 @@
-## In order to integrate Openshift with Okta with Oauth authentication follow this repository.
+# OpenShift + Okta OAuth Integration Guide
 
-Prerequisite.
+## Overview
 
-1. Ensure you have an application created on the Okta.
-2. Openshift 4 SNO/CRC/Cluster running.
-3. Openshift should able to reach Okta.
+In order to integrate OpenShift with Okta using OAuth authentication, follow the steps outlined in this repository.
 
-### Steps:
+## Prerequisites
 
-1. If you do not have Okta account and application, first create a trial account at [Okta](https://developer.okta.com/)
-2. Create an application by following below steps.
-3. Create App Inegartion by cliking on
-4. Choose the Type as OIDC and Web application
-5. Specify the Redirect URL of Openshift. It should be like below. Okta as last is the authentication source which you will be creating.
-```bash
- https://your-cluster's-oauth-url/oauth/callback/okta
-```
-6. Now copy the Client ID and Secret for the Client ID and save the secret safely at a place.
-7. Also copy the OKTA URL from the URL bar it should look like - https://dev-12345678-admin.okta.com/
-8. Now Create a user by going ot the Directory > People > Add Person
-9. Provide a username and email ID, Also choose Password as `set by admin` and set the password.
-10. Now Open OCP cluster console.
-11. Go to Administer >> Cluster Settings >> Configuration >> Oauth
-12. At Bottom of page click on  Add >> OpenID connect
-13.  Enter following details which we copied from the Okta console and then submit.
-     Client ID
-     Client Secret
-     Issuer URL
-14. For few minutes so that oauth pods can restart.
-15. Now try to login with user which we created in Okta.
+1. Ensure you have an application created on Okta.
+2. OpenShift 4 SNO/CRC/Cluster should be running.
+3. OpenShift should be able to reach Okta.
+
+## Steps
+
+1. If you do not have an Okta account and application, first create a trial account at [Okta](https://developer.okta.com/)
+2. Create an application integration by navigating to:
+   ```
+   Applications >> Create App Integration
+   ```
+   ![Create Application](images/1-Create-app-integration.png)
+3. Create App Integration by clicking on the button.
+4. Choose the sign-in method as **OIDC** and application type as **Web application**.
+   ![Choose OIDC and web application](images/2-oidc-web-application.png)
+5. Specify the **Redirect URL** of OpenShift. It should look like the following. Note that `okta` at the end of the URL is the authentication source name that you'll configure in OpenShift.
+   ```bash
+   https://your-cluster's-oauth-url/oauth/callback/okta
+   ```
+   ![Specify the Redirect URL](images/3-redirect-url.png)
+6. Copy the **Client ID** and **Client Secret** and save them securely.
+   ![Copy Client ID and Secret Key](images/4-client-id-secret-key.png)
+7. Copy the **OKTA URL** from your browser's URL bar. It should look like:
+   ```
+   https://dev-12345678-admin.okta.com/
+   ```
+8. Create a user by going to:
+   ```
+   Directory >> People >> Add Person
+   ```
+   ![Create user](images/5-create-user.png)
+9. Provide a username and email ID. Choose **Password** as `set by admin`, set the password, and save.
+   ![Provide user details](images/6-create-user-1.png)
+10. Open the OpenShift cluster console.
+11. Navigate to:
+    ```
+    Administer >> Cluster Settings >> Configuration >> OAuth
+    ```
+    ![OAuth Settings](images/7-cluster-setting-oauth.png)
+12. At the bottom of the page, click:
+    ```
+    Add >> OpenID Connect
+    ```
+    ![OpenID connect](images/8-openid-connect.png)
+13. Enter the following details that were copied from the Okta console and submit. Also, use the same authentication source name `okta` as provided in Step 5.
+    ```bash
+    Client ID
+    Client Secret
+    Issuer URL
+    ```
+    ![Fill Details](images/9-fill-oauth-details.png)
+14. Wait a few minutes for the OAuth pods to restart.
+15. Try logging on OCP console. When you try to reach the Console URL choose okta.
+   ![Choose Okta](images/10-login-choose-okta.png)
+16. Now you will be redirected to the Okta login screen to login with user you created on Okta.
+   ![Choose Okta](images/11-redirected-to-okta.png)
+---
+
+✅ You have now successfully integrated Okta with OpenShift using OAuth!
