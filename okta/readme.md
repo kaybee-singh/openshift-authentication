@@ -23,7 +23,7 @@ In order to integrate OpenShift with Okta using OAuth authentication, follow the
    ![Choose OIDC and web application](images/2-oidc-web-application.png)
 5. Specify the **Redirect URL** of OpenShift. It should look like the following. Note that `okta` at the end of the URL is the authentication source name that you'll configure in OpenShift.
    ```bash
-   https://your-cluster's-oauth-url/oauth/callback/okta
+   https://oauth-openshift.apps.url/oauth2callback/<idp-provider-name>
    ```
    ![Specify the Redirect URL](images/3-redirect-url.png)
 6. Copy the **Client ID** and **Client Secret** and save them securely.
